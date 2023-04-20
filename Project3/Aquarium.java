@@ -52,8 +52,9 @@ public class Aquarium extends Thread{
         F.setUndecorated(true);
         F.setVisible(true);
         F.add(B);
-        Thread t = new Animation(B);
         F.pack();
         F.setVisible(true);
+        Thread t = new Animation(B);
+        t.start();
     }
 }

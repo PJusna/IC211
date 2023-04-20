@@ -9,14 +9,17 @@ import java.io.*;
 
 public class Background extends JComponent{
     private Shark Bob;
+    private Tetra Rob;
     public Background(){
         super();
-        Bob = new Shark(200, 200);
         setPreferredSize(new Dimension(400, 400));
+        Bob = new Shark(750, 100);
+        Rob = new Tetra(250, 100);
     }
 
     public void step() {
       Bob.step();
+      Rob.step();
     }
 
     protected void paintComponent(Graphics g) {
@@ -38,7 +41,7 @@ public class Background extends JComponent{
         } catch (IOException e) {}
         b2.drawImage(img, 0, 0, null);
 
-        Bob.paint(b2);
+        
 
         AffineTransform tf = new AffineTransform();
         AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
@@ -46,7 +49,10 @@ public class Background extends JComponent{
         op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
         img = op.filter(img, null); 
         b2.drawImage(img, 0, 0, null);
-
+        b2.setColor(Color.BLACK);
+        Bob.paint(b2);
+        b2.setColor(Color.RED);
+        Rob.paint(b2);
         Toolkit.getDefaultToolkit().sync();
     }
 }
