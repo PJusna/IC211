@@ -12,7 +12,7 @@ public class Guppy implements Living{
     public String getName(){
         return "Guppy";
     }
-    public void Move(int direction){
+    public void step(){
         x++;
     }
     public String GetLocation(){

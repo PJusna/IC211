@@ -12,7 +12,7 @@ public class Tetra implements Living{
     public String getName(){
         return "Tetra";
     }
-    public void Move(int direction){
+    public void step(int direction){
         x++;
     }
     public String GetLocation(){
