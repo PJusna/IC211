@@ -1,0 +1,7 @@
+The IC211 Lab06 is based on a an overatching parent class name Moving Dot. It holds the basic information 
+needed for any given dot that an object oriented programmer could want to implement. It holds the base constructor, 
+the step function for moving a dot, and the turn functions. Additional dots need to simple extend the MovingDot and 
+implementing their of version of Turning in the Turn method and color in the toString method.
+
+Polymorphism is implemented in the toString returns of the colored dot classes. Their to string returns are polymorphic
+in returning unique characters to the Lab06.java file.  
