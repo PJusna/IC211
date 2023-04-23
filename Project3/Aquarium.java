@@ -41,13 +41,6 @@ public class Aquarium extends Thread{
         Menu M = new Menu(F);
         Menu.MenuDisplay();   
 
-        //Introduce Life
-        //ArrayList<Living> L = new ArrayList<Living>();   
-        //if(true){
-        //    L.add(new Shark());
-        //    L.add(new Tetra());
-        //    L.add(new Guppy());
-        //}
         F.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         F.setUndecorated(true);
         F.setVisible(true);

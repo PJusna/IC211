@@ -21,14 +21,14 @@ public class Tetra implements Living{
     }
     public void step(){
         
-        if(x < 100){
+        if(x < 200){
             dx = 1;
-        }else if(x > 200){
+        }else if(x > 700){
             dx = -1;
         }
         if(y < 100){
             dy = 1;
-        }else if(y > 200){
+        }else if(y > 700){
             dy = -1;
         }
         x = x + dx;
@@ -38,7 +38,15 @@ public class Tetra implements Living{
     }
 
     public void paint(Graphics2D g) {
-        g.fill(new Ellipse2D.Double(x, y, 8, 8));
+        try {
+          Foto = ImageIO.read(new File("Guppy1.0.png"));
+        } catch (IOException e) {}
+        AffineTransform tf = new AffineTransform();
+        AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
+        tf.scale(0.1, 0.1);
+        op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
+        Foto = op.filter(Foto, null);
+        g = Foto.createGraphics();
     }
 
     public String GetLocation(){

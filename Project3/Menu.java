@@ -16,9 +16,10 @@ public class Menu extends JPanel{
     public static JComboBox<String> AddFish = new JComboBox<String> (Species);
     public static JButton addFishButton = new JButton("ADD");
     public static JComboBox<String> AdjustSpecies = new JComboBox<String> (Species); 
+    
     public static JSlider AdjustHunger = new JSlider(0, 10, 5);
     public static JSlider AdjustSpeed = new JSlider(0, 10, 5);
-
+    
     public Menu(JFrame F){
         this.F = F; 
     }
@@ -28,6 +29,9 @@ public class Menu extends JPanel{
         P.setPreferredSize(new Dimension(275, 100));
         F.add(P, BorderLayout.EAST);
         
+        Start.addActionListener(new StartButtonListener());
+        Feed.addActionListener(new FeedButtonListener());
+        addFishButton.addActionListener(new AddButtonListener("Add", AdjustHunger.getValue(), AdjustSpeed.getValue()));
         P.add(Start);
         P.add(AddFish);
         P.add(addFishButton);

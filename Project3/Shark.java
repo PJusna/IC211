@@ -23,7 +23,7 @@ public class Shark implements Living{
         
         if(x < 100){
             dx = 1;
-        }else if(x > 200){
+        }else if(x > 800){
             dx = -1;
         }
         if(y < 100){
@@ -38,7 +38,17 @@ public class Shark implements Living{
     }
 
     public void paint(Graphics2D g) {
-        g.fill(new Ellipse2D.Double(x, y, 8, 8));
+        try {
+          Foto = ImageIO.read(new File("Shark1.0.png"));
+        } catch (IOException e) {}
+        
+        AffineTransform tf = new AffineTransform();
+        AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
+        tf.scale(1, 1);
+        op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
+        Foto = op.filter(Foto, null);
+        g = Foto.createGraphics();
+        g.drawImage(Foto, (int) x, (int) y, null);
     }
 
     public String GetLocation(){
