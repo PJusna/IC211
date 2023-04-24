@@ -11,6 +11,8 @@ public class Plankton implements Living{
 
 
     public Plankton(double x, double y){
+        this.x = x;
+        this.y = y;
     }
     public String getName(){
         return "Plankton";

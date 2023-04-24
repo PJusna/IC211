@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class StartButtonListener implements ActionListener {    
+class ButtonClickListener implements ActionListener {    
     private String S;
     public ButtonClickListener() {
         S = "Start";

@@ -31,11 +31,11 @@ public class Background extends JComponent{
     }
 
     public void addLiving(String name){
-      if(name.equals("Plank")){
+        System.out.println(name);
         Planks.add(new Plankton(500, 500));
         PlankCnt++;
-      }
-      else if(name.equals("Guppy")){
+  
+      if(name.equals("Guppy")){
         Guppys.add(new Guppy(500, 500));
         GuppyCnt++;
       }
