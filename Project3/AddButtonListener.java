@@ -3,10 +3,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 class AddButtonListener implements ActionListener {    
-    private String Speceis;
+    private JComboBox Speceis;
     private int hunger, speed;
     private Background P;
-    public AddButtonListener(String S, int h, int s, Background P) {
+    public AddButtonListener(JComboBox S, int h, int s, Background P) {
         this.Speceis = S;
         this.hunger = h;
         this.speed = s;
@@ -15,6 +15,6 @@ class AddButtonListener implements ActionListener {
   
     public void actionPerformed(ActionEvent e) {
         System.out.println(Speceis + " " + hunger + " " + speed);
-        P.addLiving(Speceis);
+        P.addLiving((String)Speceis.getSelectedItem());
     }
 }
