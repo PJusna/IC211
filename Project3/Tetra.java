@@ -21,12 +21,12 @@ public class Tetra implements Living{
     }
     public void step(){
         
-        if(x < 200){
+        if(x < 20){
             dx = 1;
-        }else if(x > 700){
+        }else if(x > 1400){
             dx = -1;
         }
-        if(y < 100){
+        if(y < 10){
             dy = 1;
         }else if(y > 700){
             dy = -1;
@@ -39,14 +39,16 @@ public class Tetra implements Living{
 
     public void paint(Graphics2D g) {
         try {
-          Foto = ImageIO.read(new File("Guppy1.0.png"));
+          Foto = ImageIO.read(new File("Tetra1.0.jpg"));
         } catch (IOException e) {}
+        
         AffineTransform tf = new AffineTransform();
         AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
         tf.scale(0.1, 0.1);
         op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
         Foto = op.filter(Foto, null);
-        g = Foto.createGraphics();
+        //g = Foto.createGraphics();
+        g.drawImage(Foto, (int) x, (int) y, null);
     }
 
     public String GetLocation(){

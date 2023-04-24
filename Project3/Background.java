@@ -13,26 +13,43 @@ public class Background extends JComponent{
     private ArrayList<Shark> Sharks = new ArrayList<Shark>();
     private ArrayList<Tetra> Tetras = new ArrayList<Tetra>();
     private ArrayList<Guppy> Guppys = new ArrayList<Guppy>();
+    private ArrayList<Plankton> Planks = new ArrayList<Plankton>();
     
-    public int SharkCnt = 1, GuppyCnt = 1, TetraCnt = 1;
+    public int SharkCnt = 1, GuppyCnt = 2, TetraCnt = 3, PlankCnt = 0;
     public Background(){
         super();
         setPreferredSize(new Dimension(400, 400));
         for(int i = 0; i < SharkCnt; i++){
-          Sharks.add(new Shark(100 + 200 * i, 500));
+          Sharks.add(new Shark(100 + 300 * i, 100 + 300*i));
         }
         for(int i = 0; i < GuppyCnt; i++){
-          Guppys.add(new Guppy(200 + 75 * i, 100));
+          Guppys.add(new Guppy(200 + 75 * i, 100 + 250*i));
         }
         for(int i = 0; i < TetraCnt; i++){
-          Tetras.add(new Tetra(300 + 50 * i, 800));
+          Tetras.add(new Tetra(300 + 250 * i, 800 - 50 * i));
         }
     }
 
+    public void addLiving(String name){
+      if(name.equals("Plank")){
+        Planks.add(new Plankton(500, 500));
+        PlankCnt++;
+      }
+      else if(name.equals("Guppy")){
+        Guppys.add(new Guppy(500, 500));
+        GuppyCnt++;
+      }
+      else if(name.equals("Tetra")){
+        Tetras.add(new Tetra(100, 900));
+        TetraCnt++;
+      }
+      else if(name.equals("Shark")){
+        Sharks.add(new Shark(800, 300));
+        SharkCnt++;
+      }
+    }
+
     public void step() {
-      
-      
-      
       for(int i = 0; i < SharkCnt; i++){
         Sharks.get(i).step();
       }
@@ -41,6 +58,9 @@ public class Background extends JComponent{
       }
       for(int i = 0; i < TetraCnt; i++){
         Tetras.get(i).step();
+      }
+      for(int i = 0; i < PlankCnt; i++){
+        Planks.get(i).step();
       }
     }
 

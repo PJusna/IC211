@@ -4,11 +4,12 @@ import java.awt.event.*;
 
 class FeedButtonListener implements ActionListener {    
     private String S;
-    public FeedButtonListener() {
-        S = "Feed";
+    Background B;
+    public FeedButtonListener(Background B) {
+        this.B = B;
     }
   
     public void actionPerformed(ActionEvent e) {
-        System.out.println(S);
+        B.addLiving("Plank");
     }
 }

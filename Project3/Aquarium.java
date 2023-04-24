@@ -38,7 +38,7 @@ public class Aquarium extends Thread{
         Background B = new Background();
         
         //Make the menu
-        Menu M = new Menu(F);
+        Menu M = new Menu(F, B);
         Menu.MenuDisplay();   
 
         F.setExtendedState(JFrame.MAXIMIZED_BOTH); 

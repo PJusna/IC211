@@ -8,7 +8,8 @@ public class Menu extends JPanel{
     //-Adjust
     //-Add (3)
     //-
-    public static JFrame F;
+    public static JFrame     F;
+    public static Background B;
 
     public static JButton Start = new JButton("START");
     public static JButton Feed = new JButton("FEED");
@@ -20,8 +21,9 @@ public class Menu extends JPanel{
     public static JSlider AdjustHunger = new JSlider(0, 10, 5);
     public static JSlider AdjustSpeed = new JSlider(0, 10, 5);
     
-    public Menu(JFrame F){
+    public Menu(JFrame F, Background B){
         this.F = F; 
+        this.B = B;
     }
 
     public static void MenuDisplay() {
@@ -29,9 +31,7 @@ public class Menu extends JPanel{
         P.setPreferredSize(new Dimension(275, 100));
         F.add(P, BorderLayout.EAST);
         
-        Start.addActionListener(new StartButtonListener());
-        Feed.addActionListener(new FeedButtonListener());
-        addFishButton.addActionListener(new AddButtonListener("Add", AdjustHunger.getValue(), AdjustSpeed.getValue()));
+
         P.add(Start);
         P.add(AddFish);
         P.add(addFishButton);
@@ -42,5 +42,9 @@ public class Menu extends JPanel{
         P.add(AdjustHunger);
         P.add(new JLabel("Speed:  "));
         P.add(AdjustSpeed);
+
+        Start.addActionListener(new StartButtonListener());
+        Feed.addActionListener(new FeedButtonListener(B));
+        addFishButton.addActionListener(new AddButtonListener((String)AddFish.getSelectedItem(), AdjustHunger.getValue(), AdjustSpeed.getValue(), B));
     }
 }
