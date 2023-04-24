@@ -13,23 +13,23 @@ public class Shark implements Living{
     public Shark(int x, int y){
         this.x = x;
         this.y = y;
-        dx = 1;
-        dy = 1;
+        dx = 0.5;
+        dy = 0.5;
     }
     public String getName(){
         return "Shark";
     }
     public void step(){
         
-        if(x < 10){
-            dx = 1;
-        }else if(x > 800){
-            dx = -1;
+        if(x < 300){
+            dx = 0.5;
+        }else if(x > 1465){
+            dx = -0.5;
         }
-        if(y < 10){
-            dy = 1;
-        }else if(y > 600){
-            dy = -1;
+        if(y < 200){
+            dy = 0.5;
+        }else if(y > 1015){
+            dy = -0.5;
         }
         x = x + dx;
         y = y + dy;
@@ -51,10 +51,7 @@ public class Shark implements Living{
         g.drawImage(Foto, (int) x, (int) y, null);
     }
 
-    public String GetLocation(){
-        //make this a node?
-        String t = "";
-        t = x + " " + y;
-        return t;
+    public double GetLocation(){
+        return x*1000 + y;
     }
 }

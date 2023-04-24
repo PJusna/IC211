@@ -9,6 +9,7 @@ public class Tetra implements Living{
     //location
     double x = 100, y = 100, dx = 1, dy = 1;
     BufferedImage Foto = null;
+    boolean Dead = false;
 
     public Tetra(int x, int y){
         this.x = x;
@@ -16,19 +17,21 @@ public class Tetra implements Living{
         dx = 1;
         dy = 1;
     }
+
+
     public String getName(){
-        return "Shark";
+        return "Tetra";
     }
     public void step(){
         
-        if(x < 20){
+        if(x < 5){
             dx = 1;
-        }else if(x > 1400){
+        }else if(x > 1975){
             dx = -1;
         }
-        if(y < 10){
+        if(y < 5){
             dy = 1;
-        }else if(y > 700){
+        }else if(y > 1325){
             dy = -1;
         }
         x = x + dx;
@@ -51,10 +54,7 @@ public class Tetra implements Living{
         g.drawImage(Foto, (int) x, (int) y, null);
     }
 
-    public String GetLocation(){
-        //make this a node?
-        String t = "";
-        t = x + " " + y;
-        return t;
+    public double GetLocation(){
+        return x*1000 + y;
     }
 }

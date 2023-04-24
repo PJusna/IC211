@@ -10,58 +10,55 @@ import java.awt.image.*;
 import java.io.*;   
 
 public class Background extends JComponent{
-    private ArrayList<Shark> Sharks = new ArrayList<Shark>();
-    private ArrayList<Tetra> Tetras = new ArrayList<Tetra>();
-    private ArrayList<Guppy> Guppys = new ArrayList<Guppy>();
-    private ArrayList<Plankton> Planks = new ArrayList<Plankton>();
+    private ArrayList<Living> Alive = new ArrayList<Living>();
+    private int foodrop = 500;
     
-    public int SharkCnt = 1, GuppyCnt = 2, TetraCnt = 3, PlankCnt = 0;
     public Background(){
         super();
         setPreferredSize(new Dimension(400, 400));
-        for(int i = 0; i < SharkCnt; i++){
-          Sharks.add(new Shark(100 + 300 * i, 100 + 300*i));
+        for(int i = 0; i < 1; i++){
+          Alive.add(new Shark(600, 800));
         }
-        for(int i = 0; i < GuppyCnt; i++){
-          Guppys.add(new Guppy(200 + 75 * i, 100 + 250*i));
+        for(int i = 0; i < 3; i++){
+          Alive.add(new Guppy(200 + 75 * i, 100 + 250*i));
         }
-        for(int i = 0; i < TetraCnt; i++){
-          Tetras.add(new Tetra(300 + 250 * i, 800 - 50 * i));
+        for(int i = 0; i < 3; i++){
+          Alive.add(new Tetra(300 + 250 * i, 800 - 50 * i));
         }
     }
 
     public void addLiving(String name){
-        System.out.println(name);
-        Planks.add(new Plankton(500, 500));
-        PlankCnt++;
-  
-      if(name.equals("Guppy")){
-        Guppys.add(new Guppy(500, 500));
-        GuppyCnt++;
+      if(name.equals("Plank")){
+        Alive.add(new Plankton(foodrop, 0));
+        foodrop += 100;
+        if(foodrop > 1400){
+          foodrop = 200;
+        }
+      }
+      else if(name.equals("Guppy")){
+        Alive.add(new Guppy(500, 500));
       }
       else if(name.equals("Tetra")){
-        Tetras.add(new Tetra(100, 900));
-        TetraCnt++;
+        Alive.add(new Tetra(100, 900));
       }
       else if(name.equals("Shark")){
-        Sharks.add(new Shark(800, 300));
-        SharkCnt++;
+        Alive.add(new Shark(800, 300));
       }
     }
 
     public void step() {
-      for(int i = 0; i < SharkCnt; i++){
-        Sharks.get(i).step();
-      }
-      for(int i = 0; i < GuppyCnt; i++){
-        Guppys.get(i).step();
-      }
-      for(int i = 0; i < TetraCnt; i++){
-        Tetras.get(i).step();
-      }
-      for(int i = 0; i < PlankCnt; i++){
-        Planks.get(i).step();
-      }
+        for(Living l: Alive){ l.step(); }
+//        ArrayList<Living> Preditors = new ArrayList<Living>();
+//        Preditors = Alive;
+//        for(Living Preditor: Preditors){
+//          for(Living Prey: Alive){
+//            if((Prey.getName().equals("Tetra") || Prey.getName().equals("Guppy"))){
+//              if(Preditor.GetLocation() <= Prey.GetLocation()){
+//                if(Preditor.getName().equals("Shark")){ Alive.remove(Prey); }
+//              } 
+//            }
+//          } 
+//        }
     }
 
     protected void paintComponent(Graphics g) {
@@ -87,19 +84,8 @@ public class Background extends JComponent{
       op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
       img = op.filter(img, null); 
       b2.drawImage(img, 0, 0, null);
-      b2.setColor(Color.BLACK);
-      
-      for(int i = 0; i < SharkCnt; i++){
-        Sharks.get(i).paint(b2);
-      }
-      b2.setColor(Color.RED);
-      for(int i = 0; i < GuppyCnt; i++){
-        Guppys.get(i).paint(b2);
-      }
-      b2.setColor(Color.GREEN);
-      for(int i = 0; i < TetraCnt; i++){
-        Tetras.get(i).paint(b2);
-      }
+
+      for(Living l: Alive){ l.paint(b2); }
       Toolkit.getDefaultToolkit().sync();
     }
 }

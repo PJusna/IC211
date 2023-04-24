@@ -45,6 +45,6 @@ public class Menu extends JPanel{
 
         Start.addActionListener(new StartButtonListener());
         Feed.addActionListener(new FeedButtonListener(B));
-        addFishButton.addActionListener(new AddButtonListener((String)AddFish.getSelectedItem(), AdjustHunger.getValue(), AdjustSpeed.getValue(), B));
+        addFishButton.addActionListener(new AddButtonListener(AddFish, AdjustHunger.getValue(), AdjustSpeed.getValue(), B));
     }
 }

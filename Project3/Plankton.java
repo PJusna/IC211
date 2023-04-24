@@ -25,10 +25,7 @@ public class Plankton implements Living{
         g.fill(new Ellipse2D.Double(x, y, 8, 8));
     }
 
-    public String GetLocation(){
-        //make this a node?
-        String t = "";
-        t = x + " " + y;
-        return t;
+    public double GetLocation(){
+        return x*1000 + y;
     }
 }
