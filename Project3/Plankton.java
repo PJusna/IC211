@@ -5,7 +5,7 @@ import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;  
 
-public class Plankton implements Living{
+public class Plankton extends Living{
     //location
     double x = 100, y = 100, speed = 1;
 
@@ -16,6 +16,9 @@ public class Plankton implements Living{
     }
     public String getName(){
         return "Plankton";
+    }
+    public void AdjustSandH(int S, int H){
+        speed = S * 0.1;
     }
     public int step(){
         if(y<750){ y = y + speed; }

@@ -37,6 +37,21 @@ public class Background extends JComponent{
           Alive.add(new Tetra(300 + 250 * i, 800 - 50 * i));
         }    
     }
+
+    public void adjustSpecies(String nS, int nH, int nSpeed){
+      System.out.print(nS + nH + nSpeed);
+      for(int l = 0; l < Alive.size(); l++){ 
+          if(Alive.get(l).getName().equals(nS)){
+            Alive.get(l).AdjustSandH(nSpeed, nH);
+          }
+          else if(Alive.get(l).getName().equals(nS)){
+            Alive.get(l).AdjustSandH(nSpeed, nH);
+          }
+          else if(Alive.get(l).getName().equals(nS)){
+            Alive.get(l).AdjustSandH(nSpeed, nH);
+          }
+      }
+    }
     
     public Living GetClickTarget(){
       return ClickTarget;
@@ -133,7 +148,7 @@ public class Background extends JComponent{
       b2.drawImage(img, 0, 0, null);
       AffineTransform tf = new AffineTransform();
       AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
-      tf.scale(4, 4);
+      tf.setToScale( this.getWidth()/300 + 1, this.getHeight()/300 + 1);      
       op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
       img = op.filter(img, null); 
       b2.drawImage(img, 0, 0, null);

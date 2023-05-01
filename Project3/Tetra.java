@@ -5,13 +5,14 @@ import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;  
 
-public class Tetra implements Living{
+public class Tetra extends Living{
     //location
     double x = 100, y = 100, dx = 1, dy = 1, speed = 1;
     BufferedImage Foto = null;
     boolean Dead = false;
     int hunger = 1500, metab = 1;
     public Tetra(int x, int y){
+        super();
         this.x = x;
         this.y = y;
         dx = 1;
@@ -21,6 +22,11 @@ public class Tetra implements Living{
 
     public String getName(){
         return "Tetra";
+    }
+
+    public void AdjustSandH(int S, int H){
+        speed = S * 0.1;
+        metab = H;
     }
     public int step(){
         

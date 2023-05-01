@@ -5,13 +5,14 @@ import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;  
 
-public class Shark implements Living{
+public class Shark extends Living{
     //location
     double x = 100, y = 100, dx = 1, dy = 1, speed = 0.1;
     BufferedImage Foto = null;
     int hunger = 1500, metab = 1;
 
     public Shark(int x, int y){
+        super();
         this.x = x;
         this.y = y;
         dx = 0.5;
@@ -19,6 +20,10 @@ public class Shark implements Living{
     }
     public String getName(){
         return "Shark";
+    }
+    public void AdjustSandH(int S, int H){
+        speed = S * 0.1;
+        metab = H;
     }
     public int step(){
         if(x < 300){

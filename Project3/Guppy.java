@@ -5,7 +5,7 @@ import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;   
 
-public class Guppy implements Living{
+public class Guppy extends Living{
     //location
     double x = 100, y = 100, dx = 1, dy = 1, speed = 1;
     BufferedImage Foto = null;
@@ -18,6 +18,10 @@ public class Guppy implements Living{
     }
     public String getName(){
         return "Guppy";
+    }
+    public void AdjustSandH(int S, int H){
+        speed = S * 0.1;
+        metab = H;
     }
     public int step(){
         

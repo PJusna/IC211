@@ -10,16 +10,16 @@ public class Menu extends JPanel {
     //-Adjust
     //-Add (3)
     //-
-    public static JFrame     F;
-    public static JPanel     P;
-    public static Background B;
-    public static boolean running = true;
-    public static JButton Start = new JButton("START");
-    public static JButton Pause = new JButton("PAUSE");
-    public static JButton Feed = new JButton("FEED");
-    public static String[] Species = {"Shark", "Tetra", "Guppy"};
-    public static JComboBox<String> AddFish = new JComboBox<String> (Species);
-    public static JButton addFishButton = new JButton("ADD");
+    public static JFrame                                                          F;
+    public static JPanel                                                          P;
+    public static Background                                                      B;
+    public static boolean                                            running = true;
+    public static JButton                              Start = new JButton("START");
+    public static JButton                              Pause = new JButton("PAUSE");
+    public static JButton                                Feed = new JButton("FEED");
+    public static String[]                    Species = {"Shark", "Tetra", "Guppy"};
+    public static JComboBox<String>       AddFish = new JComboBox<String> (Species);
+    public static JButton                        addFishButton = new JButton("ADD");
     public static JComboBox<String> AdjustSpecies = new JComboBox<String> (Species); 
     
     public static JSlider AdjustHunger = new JSlider(0, 10, 5);
@@ -51,13 +51,15 @@ public class Menu extends JPanel {
         D.setPreferredSize(new Dimension(500, 50));
         P.add(D);
         
-//        P.add(new JLabel("Species:  "));
-//        P.add(AdjustSpecies);
-//        P.add(new JLabel("Hunger:  "));
-//        P.add(AdjustHunger);
-//        P.add(new JLabel("Speed:  "));
-//        P.add(AdjustSpeed);
+        P.add(new JLabel("Pick a Species to adjust:"));
+        P.add(AdjustSpecies);
+        P.add(new JLabel("How much do they need to eat?"));
+        P.add(AdjustHunger);
+        P.add(new JLabel("How fast are they?"));
+        P.add(AdjustSpeed);
 
+
+        AdjustSpecies.addActionListener(new AdjustmentListener( AdjustSpecies, AdjustHunger, AdjustSpeed, B));
         Start.addActionListener(new StartButtonListener());
         Pause.addActionListener(new PauseButtonListener());
         Feed.addActionListener(new FeedButtonListener(B));

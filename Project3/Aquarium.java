@@ -59,8 +59,8 @@ public class Aquarium extends Thread{
     public static void main(String[] args) {
         
         JFrame F     = new JFrame("Peter's Fish Tank");
-        F.setSize(1000, 500);
-        F.setLocation(500, 500);
+        F.setSize(10000, 8000);
+        F.setLocation(0, 0);
         F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Create Background
