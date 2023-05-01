@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 import java.awt.geom.*;
-
+import java.util.Random;
 // libraries needed for drawing an image
 import javax.imageio.*;
 import java.awt.image.*;
@@ -20,7 +20,8 @@ import java.io.*;
 public class Background extends JComponent{  
     private ArrayList<Living> Alive = new ArrayList<Living>();
     //Starting location for where food falls in. 
-    private int foodrop = 500;
+    Random rand = new Random();
+    private int foodrop = 500, randomStart = 1;
     private Living ClickTarget = null;
     
     public Background(){
@@ -46,6 +47,7 @@ public class Background extends JComponent{
      * @param name The name of the fish the user wants to add. 
      */
     public void addLiving(String name){
+      randomStart = rand.nextInt()%200; 
       if(name.equals("Plank")){
         Alive.add(new Plankton(foodrop, 0));
         foodrop += 100;
@@ -54,13 +56,13 @@ public class Background extends JComponent{
         }
       }
       else if(name.equals("Guppy")){
-        Alive.add(new Guppy(500, 500));
+        Alive.add(new Guppy(randomStart, randomStart*2));
       }
       else if(name.equals("Tetra")){
-        Alive.add(new Tetra(100, 900));
+        Alive.add(new Tetra(randomStart*3, randomStart*4));
       }
       else if(name.equals("Shark")){
-        Alive.add(new Shark(800, 300));
+        Alive.add(new Shark(randomStart*4, randomStart));
       }
     }
     /*

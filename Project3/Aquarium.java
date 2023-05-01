@@ -58,22 +58,22 @@ public class Aquarium extends Thread{
 
     public static void main(String[] args) {
         
-        JFrame F     = new JFrame();
+        JFrame F     = new JFrame("Peter's Fish Tank");
+        F.setSize(1000, 500);
+        F.setLocation(500, 500);
+        F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         //Create Background
         Background B = new Background();
 
-        
         //Make the menu
         Menu M = new Menu(F, B);
         Menu.MenuDisplay(false); 
         
+        //Start the thread
         Thread t = new Animation(B, F, M);
         t.start(); 
         
-
-        F.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        F.setUndecorated(true);
-        F.setVisible(true);
         F.add(B);
         F.pack();
         F.setVisible(true);
