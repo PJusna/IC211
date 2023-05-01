@@ -7,8 +7,9 @@ import java.io.*;
 
 public class Shark implements Living{
     //location
-    double x = 100, y = 100, dx = 1, dy = 1;
+    double x = 100, y = 100, dx = 1, dy = 1, speed = 0.1;
     BufferedImage Foto = null;
+    int hunger = 1500, metab = 1;
 
     public Shark(int x, int y){
         this.x = x;
@@ -19,22 +20,33 @@ public class Shark implements Living{
     public String getName(){
         return "Shark";
     }
-    public void step(){
-        
+    public int step(){
         if(x < 300){
-            dx = 0.5;
-        }else if(x > 1465){
-            dx = -0.5;
+            dx = 1;
+        }else if(x > 1065){
+            dx = -1;
         }
         if(y < 200){
-            dy = 0.5;
+            dy = 1;
         }else if(y > 1015){
-            dy = -0.5;
+            dy = -1;
         }
-        x = x + dx;
-        y = y + dy;
-        //x ++;
-        //y++;
+        x = x + dx*speed;
+        y = y + dy*speed;
+        hunger = hunger - metab;
+        return hunger;
+    }
+    public double getSpeed(){
+        return speed;
+    }
+
+    public int getHunger(){
+        return hunger;
+    }
+
+    public void feed(){
+        hunger += 100;
+        
     }
 
     public void paint(Graphics2D g) {
@@ -42,16 +54,25 @@ public class Shark implements Living{
           Foto = ImageIO.read(new File("Shark2.0.jpg"));
         } catch (IOException e) {}
         
-        AffineTransform tf = new AffineTransform();
-        AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
-        tf.scale(0.1, 0.1);
-        op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
+        AffineTransform tf = AffineTransform.getScaleInstance(-0.1, 0.1);
+        tf.translate(-Foto.getWidth(), 0);
+        AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         Foto = op.filter(Foto, null);
-        //g = Foto.createGraphics();
-        g.drawImage(Foto, (int) x, (int) y, null);
+        int width = -300;
+        if(dx < 0){ width = 300; }
+        g.drawImage(Foto, (int) x, (int) y, width, 150, null);
     }
 
-    public double GetLocation(){
-        return x*1000 + y;
+    public double GetX(){
+        return x;
+    }
+    public double GetY(){
+        return y;
+    }
+    public boolean doesThisCollide(int a, int b){
+        if((x > a) && (x - 300 < a) && (y + 100 > b) && (y < b)){
+            return true;
+        }
+        return false;
     }
 }

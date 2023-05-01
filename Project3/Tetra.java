@@ -7,10 +7,10 @@ import java.io.*;
 
 public class Tetra implements Living{
     //location
-    double x = 100, y = 100, dx = 1, dy = 1;
+    double x = 100, y = 100, dx = 1, dy = 1, speed = 1;
     BufferedImage Foto = null;
     boolean Dead = false;
-
+    int hunger = 1500, metab = 1;
     public Tetra(int x, int y){
         this.x = x;
         this.y = y;
@@ -22,22 +22,34 @@ public class Tetra implements Living{
     public String getName(){
         return "Tetra";
     }
-    public void step(){
+    public int step(){
         
         if(x < 5){
             dx = 1;
-        }else if(x > 1975){
+        }else if(x > 1075){
             dx = -1;
         }
         if(y < 5){
             dy = 1;
-        }else if(y > 1325){
+        }else if(y > 825){
             dy = -1;
         }
-        x = x + dx;
-        y = y + dy;
-        //x ++;
-        //y++;
+        x = x + dx*speed;
+        y = y + dy*speed;
+        hunger--;
+        hunger = hunger - metab;
+        return hunger;
+    }
+    public int getHunger(){
+        return hunger;
+    }
+
+    public double getSpeed(){
+        return speed;
+    }
+
+    public void feed(){
+        hunger += 100;
     }
 
     public void paint(Graphics2D g) {
@@ -45,16 +57,26 @@ public class Tetra implements Living{
           Foto = ImageIO.read(new File("Tetra1.0.jpg"));
         } catch (IOException e) {}
         
-        AffineTransform tf = new AffineTransform();
-        AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
-        tf.scale(0.1, 0.1);
-        op = new AffineTransformOp(tf, AffineTransformOp.TYPE_BILINEAR);
+        AffineTransform tf = AffineTransform.getScaleInstance(-0.1, 0.1);
+        tf.translate(-Foto.getWidth(), 0);
+        AffineTransformOp op = new AffineTransformOp(tf, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         Foto = op.filter(Foto, null);
-        //g = Foto.createGraphics();
-        g.drawImage(Foto, (int) x, (int) y, null);
+        int width = -70;
+        if(dx < 0){ width = 70; }
+        g.drawImage(Foto, (int) x, (int) y, width, 40, null);
     }
 
-    public double GetLocation(){
-        return x*1000 + y;
+    public double GetX(){
+        return x;
+    }
+    public double GetY(){
+        return y;
+    }
+
+    public boolean doesThisCollide(int a, int b){
+        if((x + 50 > a) && (x - 50 < a) && (y + 50 > b) && (y - 50 < b)){
+            return true;
+        }
+        return false;
     }
 }

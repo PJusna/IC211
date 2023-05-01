@@ -5,10 +5,11 @@ import java.awt.event.*;
 class StartButtonListener implements ActionListener {    
     private String S;
     public StartButtonListener() {
-        S = "Start";
+        S = "Running? ";
     }
   
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(S);
+    public void actionPerformed(ActionEvent e) {   
+        Menu.running = true;
+        System.out.println(S + Menu.running);
     }
 }

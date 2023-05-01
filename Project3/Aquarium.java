@@ -1,8 +1,14 @@
 import java.util.*;
 import java.io.*;
+import java.awt.geom.*;
 import java.awt.*;
 import javax.swing.*;
-
+/**
+ * This is the Overarching class for The Aquarium.
+ * It creates the components uses for the Moving, 
+ * non-moving, and menu options.
+ * @author MIDN Peter Asjes
+ */
 // I. Make the overarching Frame
 // II. create all moving elemnts under the living hierarchy       
 // III. create all the menu options under the static hierarchy
@@ -15,31 +21,55 @@ import javax.swing.*;
 // IV. implenment all the living and static elements into the visuals.
 
 public class Aquarium extends Thread{
-
+    /*
+     * This is the class for the thread. 
+     */
     public static class Animation extends Thread {
         private Background Liv; 
-        public Animation(Background b) {
+        private Menu         M; 
+        private JFrame       F;
+        
+        /**
+        * This is the constructor for the Animation thread in which
+        * all of the moving elements are progressed.
+        * @param b The Background holding the Array List and methods for
+        *          moving things.
+        * @param M The menu for controlling the things. 
+        */
+        public Animation(Background b, JFrame F, Menu M) {
             Liv = b;
+            this.F = F;            
+            this.M = M;
         }
         public void run() {
             while (true) {
-                try {
-                    Thread.sleep(20);
-                } catch (Exception e) {}
-                Liv.step();
+                System.out.print("");
+                if(M.getRunning()){
+                    try {
+                        Thread.sleep(20);
+                    } catch (Exception e) {}
+                    Liv.step();
+                    
+                }
                 Liv.repaint();
             }
         }
     }
 
     public static void main(String[] args) {
+        
         JFrame F     = new JFrame();
         //Create Background
         Background B = new Background();
+
         
         //Make the menu
         Menu M = new Menu(F, B);
-        Menu.MenuDisplay();   
+        Menu.MenuDisplay(false); 
+        
+        Thread t = new Animation(B, F, M);
+        t.start(); 
+        
 
         F.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         F.setUndecorated(true);
@@ -47,7 +77,6 @@ public class Aquarium extends Thread{
         F.add(B);
         F.pack();
         F.setVisible(true);
-        Thread t = new Animation(B);
-        t.start();
+
     }
 }
